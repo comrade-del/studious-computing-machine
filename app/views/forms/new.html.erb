@@ -6,75 +6,76 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= form_with(model: @form, local: true) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
 
       <div class="field">
         <%= f.label :id_number %>
-        <%= f.text_field :id_number %>
+        <%= f.text_field :id_number, class: 'form-control' %>
       </div>
 
       <div class="field">
         <%= f.label :name %>
-        <%= f.text_field :name %>
+        <%= f.text_field :name, class: 'form-control' %>
       </div>
 
       <div class="field">
         <%= f.label :gender %>
-        <%= f.text_field :gender %>
+        <%= f.text_field :gender, class: 'form-control' %>
       </div>
 
       <div class="field">
         <%= f.label :phone_number %>
-        <%= f.text_field :phone_number %>
+        <%= f.text_field :phone_number, class: 'form-control' %>
       </div>
 
       <div class="field">
         <%= f.label :address %>
-        <%= f.text_field :address %>
+        <%= f.text_field :address, class: 'form-control' %>
       </div>
       
       <div class="field">
         <%= f.label :city %>
-        <%= f.text_field :city %>
+        <%= f.text_field :city, class: 'form-control' %>
       </div>
 
       <div class="field">
         <%= f.label :state %>
-        <%= f.text_field :state %>
+        <%= f.text_field :state, class: 'form-control' %>
       </div>
 
       <div class="field">
         <%= f.label :house_size %>
-        <%= f.text_field :house_size %>
+        <%= f.text_field :house_size, class: 'form-control' %>
       </div>
 
       <div class="field">
         <%= f.label :relationship_in_household %>
-        <%= f.text_field :relationship %>
+        <%= f.text_field :relationship, class: 'form-control' %>
       </div>
 
       <div class="field">
         <%= f.label :marital_status %>
-        <%= f.text_field :marital_status %>
+        <%= f.text_field :marital_status, class: 'form-control' %>
       </div>
 
       <div class="field">
         <%= f.label :religion %>
-        <%= f.text_field :religion %>
+        <%= f.text_field :religion, class: 'form-control' %>
       </div>
 
       <div class="field">
         <%= f.label :education_level %>
-        <%= f.text_field :education %>
+        <%= f.text_field :education, class: 'form-control' %>
       </div>
 
       <div class="field">
         <%= f.label :employment %>
-        <%= f.text_field :employment %>
+        <%= f.text_field :employment, class: 'form-control' %>
       </div>
 
       <div class="field">
         <%= f.label :income_level %>
-        <%= f.text_field :income_level %>
+        <%= f.text_field :income_level, class: 'form-control' %>
       </div>
 
       <%= f.submit "Submit", class: "btn btn-primary" %>
