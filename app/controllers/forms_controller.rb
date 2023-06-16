@@ -1,14 +1,14 @@
 class FormsController < ApplicationController
-    before_action :logged_in_user, only: [:create, :destroy]
-    before_action :correct_user, only: [:destroy]
+    #before_action :logged_in_user, only: [:create, :destroy]
+    #before_action :correct_user, only: [:destroy]
   
     def new
       @form = Form.new
     end
   
     def create
-        puts current_user.inspect
-        @form = current_user.form.build(form_params)
+        #puts current_user.inspect
+        @form = Form.new(form_params)
         if @form.save
             flash[:success] = "Form submitted!"
             redirect_to root_url
@@ -31,10 +31,10 @@ class FormsController < ApplicationController
       params.require(:form).permit(:id_number, :name, :gender, :phone_number, :address, :city, :state, :house_size, :relationship, :marital_status, :religion, :education, :employment, :income_level)
     end
   
-    def correct_user
-      return unless action_name.in?(%w[destroy])
-      @form = current_user.form.find_by(id: params[:id])
-      redirect_to(root_url, status: :see_other) if @form.nil?
-    end
+    #def correct_user
+     # return unless action_name.in?(%w[destroy])
+      #@form = current_user.form.find_by(id: params[:id])
+      #redirect_to(root_url, status: :see_other) if @form.nil?
+    #end
   end
   

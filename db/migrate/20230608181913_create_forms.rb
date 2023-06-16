@@ -15,7 +15,7 @@ class CreateForms < ActiveRecord::Migration[7.0]
       t.string :education
       t.string :employment
       t.string :income_level
-      t.references :user, null: false, foreign_key: true
+      #t.references :user, null: false, foreign_key: true
 
       t.timestamps
     end
