@@ -22,13 +22,14 @@ class FormsController < ApplicationController
     def visualization
       # Retrieve the form data from the database or any other source
       @gender_data = Form.pluck(:gender) # Replace with your actual logic to fetch the form data
-      puts @gender_data.inspect # Print the form data to the console
+      @income_data = Form.pluck(:income_range) # New income data
     
       respond_to do |format|
         format.html { render 'visualization' } # Render the visualization.html.erb view
-        format.json { render json: @gender_data } # Respond with form data as JSON if needed
+        format.json { render json: { gender_data: @gender_data, income_data: @income_data } } # Respond with form data as JSON if needed
       end
     end
+    
     
     
   

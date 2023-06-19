@@ -4,65 +4,129 @@
 
 <h1>Data Visualization</h1>
 
-<div id="chart-container"></div>
+<div id="gender-chart-container"></div>
+<div id="income-chart-container"></div>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
-    // Retrieve the form data from the embedded JSON
-    var formData = <%= raw @gender_data.to_json %>;
+    d3.select('#gender-chart-container').selectAll('*').remove();
+    d3.select('#income-chart-container').selectAll('*').remove();
+    
+    // Retrieve the gender data from the embedded JSON
+    var genderFormData = <%= raw @gender_data.to_json %>;
 
     // Count the occurrences of each gender
-    var genderCounts = formData.reduce(function(counts, gender) {
+    var genderCounts = genderFormData.reduce(function(counts, gender) {
       counts[gender] = (counts[gender] || 0) + 1;
       return counts;
     }, {});
 
     // Convert the counts to an array of objects
-    var data = Object.entries(genderCounts).map(function([gender, count]) {
+    var genderData = Object.entries(genderCounts).map(function([gender, count]) {
       return { gender: gender, count: count };
     });
 
-    // Set up the chart dimensions
-    var width = 400;
-    var height = 300;
-    var margin = { top: 20, right: 20, bottom: 30, left: 40 };
+    // Set up the gender chart dimensions
+    var genderChartWidth = 400;
+    var genderChartHeight = 300;
+    var genderChartMargin = { top: 20, right: 20, bottom: 30, left: 40 };
 
-    // Create the scales
-    var x = d3.scaleBand()
-      .range([margin.left, width - margin.right])
+    // Create the gender chart scales
+    var genderX = d3.scaleBand()
+      .range([genderChartMargin.left, genderChartWidth - genderChartMargin.right])
       .padding(0.1)
-      .domain(data.map(function(d) { return d.gender; }));
+      .domain(genderData.map(function(d) { return d.gender; }));
 
-    var y = d3.scaleLinear()
-      .range([height - margin.bottom, margin.top])
-      .domain([0, d3.max(data, function(d) { return d.count; })]);
+    var genderY = d3.scaleLinear()
+      .range([genderChartHeight - genderChartMargin.bottom, genderChartMargin.top])
+      .domain([0, d3.max(genderData, function(d) { return d.count; })]);
 
-    // Create the chart SVG element
-    var svg = d3.select('#chart-container')
+    // Create the gender chart SVG element
+    var genderSvg = d3.select('#gender-chart-container')
       .append('svg')
-      .attr('width', width)
-      .attr('height', height);
+      .attr('width', genderChartWidth)
+      .attr('height', genderChartHeight);
 
-    // Add the bars to the chart
-    svg.selectAll('rect')
-      .data(data)
+    // Add the bars to the gender chart
+    genderSvg.selectAll('rect')
+      .data(genderData)
       .enter()
       .append('rect')
-      .attr('x', function(d) { return x(d.gender); })
-      .attr('y', function(d) { return y(d.count); })
-      .attr('width', x.bandwidth())
-      .attr('height', function(d) { return height - margin.bottom - y(d.count); })
+      .attr('x', function(d) { return genderX(d.gender); })
+      .attr('y', function(d) { return genderY(d.count); })
+      .attr('width', genderX.bandwidth())
+      .attr('height', function(d) { return genderChartHeight - genderChartMargin.bottom - genderY(d.count); })
       .attr('fill', 'steelblue');
 
-    // Add the x-axis
-    svg.append('g')
-      .attr('transform', 'translate(0,' + (height - margin.bottom) + ')')
-      .call(d3.axisBottom(x));
+    // Add the x-axis to the gender chart
+    genderSvg.append('g')
+      .attr('transform', 'translate(0,' + (genderChartHeight - genderChartMargin.bottom) + ')')
+      .call(d3.axisBottom(genderX));
 
-    // Add the y-axis
-    svg.append('g')
-      .attr('transform', 'translate(' + margin.left + ',0)')
-      .call(d3.axisLeft(y));
+    // Add the y-axis to the gender chart
+    genderSvg.append('g')
+      .attr('transform', 'translate(' + genderChartMargin.left + ',0)')
+      .call(d3.axisLeft(genderY));
+
+    // Retrieve the income data from the embedded JSON
+    var incomeFormData = <%= raw @income_data.to_json %>;
+
+    // Count the occurrences of each income range
+    var incomeCounts = incomeFormData.reduce(function(counts, income) {
+      if (counts[income]) {
+        counts[income]++;
+      } else {
+        counts[income] = 1;
+      }
+      return counts;
+    }, {});
+
+
+    // Convert the counts to an array of objects
+    var incomeData = Object.entries(incomeCounts).map(function([income, count]) {
+      return { income: income, count: count };
+    });
+
+    // Set up the income chart dimensions
+    var incomeChartWidth = 400;
+    var incomeChartHeight = 300;
+    var incomeChartMargin = { top: 20, right: 20, bottom: 30, left: 40 };
+
+    // Create the income chart scales
+    var incomeX = d3.scaleBand()
+      .range([incomeChartMargin.left, incomeChartWidth - incomeChartMargin.right])
+      .padding(0.1)
+      .domain(incomeData.map(function(d) { return d.income; }));
+
+    var incomeY = d3.scaleLinear()
+      .range([incomeChartHeight - incomeChartMargin.bottom, incomeChartMargin.top])
+      .domain([0, d3.max(incomeData, function(d) { return d.count; })]);
+
+    // Create the income chart SVG element
+    var incomeSvg = d3.select('#income-chart-container')
+      .append('svg')
+      .attr('width', incomeChartWidth)
+      .attr('height', incomeChartHeight);
+
+    // Add the bars to the income chart
+    incomeSvg.selectAll('rect')
+      .data(incomeData)
+      .enter()
+      .append('rect')
+      .attr('x', function(d) { return incomeX(d.income); })
+      .attr('y', function(d) { return incomeY(d.count); })
+      .attr('width', incomeX.bandwidth())
+      .attr('height', function(d) { return incomeChartHeight - incomeChartMargin.bottom - incomeY(d.count); })
+      .attr('fill', 'steelblue');
+
+    // Add the x-axis to the income chart
+    incomeSvg.append('g')
+      .attr('transform', 'translate(0,' + (incomeChartHeight - incomeChartMargin.bottom) + ')')
+      .call(d3.axisBottom(incomeX));
+
+    // Add the y-axis to the income chart
+    incomeSvg.append('g')
+      .attr('transform', 'translate(' + incomeChartMargin.left + ',0)')
+      .call(d3.axisLeft(incomeY));
   });
 </script>
-

@@ -20,7 +20,7 @@
 
       <div class="field">
         <%= f.label :gender %>
-        <%= f.text_field :gender, class: 'form-control' %>
+        <%= f.select :gender, ['--Select one', 'Male', 'Female', 'Other'], class: 'form-control' %>
       </div>
 
       <div class="field">
@@ -50,12 +50,12 @@
 
       <div class="field">
         <%= f.label :relationship_in_household %>
-        <%= f.text_field :relationship, class: 'form-control' %>
+        <%= f.select :relationship_in_household, ['--Select one', 'Head of house(for single parents)', 'Father', 'Mother', 'Child'], class: 'form-control' %>
       </div>
 
       <div class="field">
         <%= f.label :marital_status %>
-        <%= f.text_field :marital_status, class: 'form-control' %>
+        <%= f.select :marital_status, ['--Select one', 'Single', 'Married', 'Divorced', 'Widowed'], class: 'form-control' %>
       </div>
 
       <div class="field">
@@ -65,17 +65,17 @@
 
       <div class="field">
         <%= f.label :education_level %>
-        <%= f.text_field :education, class: 'form-control' %>
+        <%= f.select :education_level, ['--Select one', 'Primary', 'Secondary', 'Undergraduate', 'Postgraduate', 'Other'], class: 'form-control' %>
       </div>
 
       <div class="field">
         <%= f.label :employment %>
-        <%= f.text_field :employment, class: 'form-control' %>
+        <%= f.select :employment, ['--Select one', 'Employed', 'Self-employed', 'Unemployed', 'Other'], class: 'form-control' %>
       </div>
 
       <div class="field">
-        <%= f.label :income_level %>
-        <%= f.text_field :income_level, class: 'form-control' %>
+        <%= f.label :Monthly_income_level %>
+        <%= f.select :income_level, options_for_select(['< ₦20,000', '₦20,000 - ₦40,000', '₦40,000 - ₦60,000', '₦60,000 - ₦80,000']), prompt: 'Select Income Range', class: 'form-control' %>
       </div>
 
       <%= f.submit "Submit", class: "btn btn-primary" %>
