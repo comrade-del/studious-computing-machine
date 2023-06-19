@@ -17,6 +17,20 @@ class FormsController < ApplicationController
             render 'new', status: :unprocessable_entity
         end
     end
+
+    # app/controllers/forms_controller.rb
+    def visualization
+      # Retrieve the form data from the database or any other source
+      @gender_data = Form.pluck(:gender) # Replace with your actual logic to fetch the form data
+      puts @gender_data.inspect # Print the form data to the console
+    
+      respond_to do |format|
+        format.html { render 'visualization' } # Render the visualization.html.erb view
+        format.json { render json: @gender_data } # Respond with form data as JSON if needed
+      end
+    end
+    
+    
   
     def destroy
       @form = current_user.form.find_by(id: params[:id])

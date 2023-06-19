@@ -1,0 +1,29 @@
+{
+  "name": "censify",
+  "version": "1.0.0",
+  "description": "final year project",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/comrade-del/studious-computing-machine.git"
+  },
+  "keywords": [
+    "census"
+  ],
+  "author": "Obehi Precious",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/comrade-del/studious-computing-machine/issues"
+  },
+  "homepage": "https://github.com/comrade-del/studious-computing-machine#readme",
+  "dependencies": {
+    "d3": "^7.8.5"
+  }
+}
