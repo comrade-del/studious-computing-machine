@@ -23,7 +23,7 @@ gem "bootsnap",                   "1.12.0", require: false
 # Uncomment the following line if you're running Rails
 # on a native Windows system:
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
-
+gem 'mailgun-ruby'
 
 group :development, :test do
   gem "sqlite3", "1.4.2"
