@@ -22,7 +22,7 @@ class FormsController < ApplicationController
     def visualization
       # Retrieve the form data from the database or any other source
       @gender_data = Form.pluck(:gender) # Replace with your actual logic to fetch the form data
-      @income_data = Form.pluck(:income_range) # New income data
+      @income_data = Form.pluck(:income_level) # New income data
     
       respond_to do |format|
         format.html { render 'visualization' } # Render the visualization.html.erb view
