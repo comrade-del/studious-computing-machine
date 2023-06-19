@@ -65,12 +65,14 @@ function visualizeFormData(formData) {
 }
 
 document.addEventListener('turbo:load', () => {
-    fetch('/visualization')
-      .then(response => response.json())
-      .then(data => {
-        visualizeFormData(data);
-      })
-      .catch(error => {
-        console.error('Error fetching form data:', error);
-      });
-  });
+  // Remove the previous chart
+  d3.select('#chart-container').selectAll('*').remove();
+  fetch('/visualization')
+    .then(response => response.json())
+    .then(data => {
+      visualizeFormData(data);
+    })
+    .catch(error => {
+      console.error('Error fetching form data:', error);
+    });
+});

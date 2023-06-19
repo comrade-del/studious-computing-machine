@@ -66,6 +66,8 @@ function visualizeFormData(formData) {
 }
 
 document.addEventListener('turbo:load', () => {
+  // Remove the previous chart
+  d3.select('#chart-container').selectAll('*').remove();
   fetch('/visualization')
     .then(response => response.json())
     .then(data => {
